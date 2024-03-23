@@ -1,0 +1,321 @@
+# mod -> Mod4 (windows key)
+set $mod Mod4
+
+# font
+font pango:Caskaydia Cove Nerd Font Mono 10
+
+# Start XDG autostart .desktop files using dex. See also
+# https://wiki.archlinux.org/index.php/XDG_Autostart
+exec --no-startup-id dex --autostart --environment i3
+
+
+# The combination of xss-lock, nm-applet and pactl is a popular choice, so
+# they are included here as an example. Modify as you see fit.
+
+# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
+# screen before suspend. Use loginctl lock-session to lock your screen.
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock-fancy --nofork
+
+# NetworkManager is the most popular way to manage wireless networks on Linux,
+# and nm-applet is a desktop environment-independent system tray GUI for it.
+exec --no-startup-id nm-applet
+
+# Use pactl to adjust volume in PulseAudio.
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# move tiling windows via drag & drop by left-clicking into the title bar,
+# or left-clicking anywhere into the window while holding the floating modifier.
+tiling_drag modifier titlebar
+
+
+# start a terminal
+bindsym $mod+Return exec kitty
+
+# kill focused window
+bindsym $mod+q kill
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+backslash split h
+
+# split in vertical orientation
+bindsym $mod+minus split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# Remove window text and make the border wider
+default_border pixel 3
+
+# Colorscheme
+set $bar-bg-color        #2f343f
+set $bg-color 	         #4DD0E1
+set $inactive-bg-color   #2f343f
+set $text-color          #0e1111
+set $inactive-text-color #f9eef2
+set $urgent-bg-color     #E53935
+set $urgent-text-color   #f9eef2
+
+# window colors
+#                       border              background         text                 indicator
+client.focused          $bg-color           $bg-color          $text-color          $bg-color
+client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-text-color $inactive-bg-color
+client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-color $inactive-bg-color
+client.urgent           $urgent-bg-color    $urgent-bg-color   $urgent-text-color   $urgent-bg-color
+
+# Gaps
+gaps inner 12
+# gaps outer 3
+
+# Monitors
+set $fm HDMI-1
+set $sm eDP-1 
+
+# Assign workspaces to monitors
+workspace $ws1 output $fm
+workspace $ws2 output $sm
+workspace $ws3 output $fm
+workspace $ws4 output $sm
+workspace $ws5 output $fm
+workspace $ws6 output $sm
+workspace $ws7 output $sm
+workspace $ws8 output $fm
+workspace $ws9 output $fm
+workspace $ws10 output $sm
+
+# Assign programs to workspaces
+assign [class="kitty"] $ws1
+assign [class="Gnome-terminal"] $ws1
+assign [class="Xfce4-terminal"] $ws1
+assign [class="Code"] $ws1
+assign [class="Gedit"] $ws1
+assign [class="gnome-text-editor"] $ws1
+assign [class="Google-chrome"] $ws2
+# assign [class="firefox"] $ws2
+assign [class="org.gnome.Nautilus"] $ws3
+assign [class="Thunar"] $ws3
+assign [class="File-roller"] $ws3
+assign [class="vlc"] $ws4
+assign [class="mpv"] $ws5
+assign [class="Insomnia"] $ws6
+assign [class="DBeaver"] $ws7
+assign [class="MongoDB Compass"] $ws7
+
+# Open programs in floating mode
+for_window [class="Yad"] floating enable
+for_window [class="Blueman-manager"] floating enable
+
+####### CUSTOM KEYMAPS ####################
+# Screen brightness controls
+bindsym XF86MonBrightnessUp exec light -A 5 # increase screen brightness
+bindsym XF86MonBrightnessDown exec light -U 5 # decrease screen brightness
+
+# Media player controls
+bindsym XF86AudioPlay exec playerctl play
+bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+# Power Menu
+bindsym --release XF86PowerOff exec ~/.config/polybar/scripts/powermenu.sh
+# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+q exec ~/.config/polybar/scripts/powermenu.sh
+
+# Program launcher
+bindsym $mod+d exec rofi -no-config -no-lazy-grab -show drun -modi drun -theme ~/.config/rofi/config.rasi
+
+# Browser
+bindsym $mod+b exec google-chrome
+
+# Lock keymap
+bindsym $mod+Shift+x exec i3lock-fancy 
+
+# Screenshot
+# interactive
+bindsym Shift+Print exec gnome-screenshot -i
+# crop-area
+bindsym --release Print exec gnome-screenshot -a
+
+
+##### Startup programs ####################
+# Autotiling
+exec_always --no-startup-id autotiling
+
+# Set monitors
+exec_always --no-startup-id ~/.config/i3/scripts/display.sh
+
+# Keyboard led
+# exec --no-startup-id ~/.config/i3/scripts/led.sh
+exec_always --no-startup-id xset led 3
+
+# Window effects
+exec --no-startup-id picom --config ~/.config/picom/picom.conf
+
+# Load wallpaper
+exec_always --no-startup-id feh --bg-fill ~/Pictures/background-4.jpg ~/Pictures/background-4.jpg
+# exec_always --no-startup-id nitrogen --restore
+
+# Polybar
+exec_always --no-startup-id ~/.config/polybar/launch.sh
+
+# Start common programs
+exec --no-startup-id kitty
+exec --no-startup-id google-chrome
+exec --no-startup-id thunar
+exec --no-startup-id vlc
+
+########### POWER MANAGEMENT ###############
+# Screen lock
+# exec xautolock -time 30 -locker '&& i3lock-fancy -p' -notify 30 -notifier "notify-send -u critical -t 10000 -- 'LOCKING screen in 30 seconds'"
+
+# Power management using mate-power-manager
+# exec --no-startup-id mate-power-manager
+
+# Power management using xset
+# Disable screen saver blanking -> xset s off
+# Change blank time to 1 hour -> xset s 3600 3600
+# Turn off DPMS -> xset -dpms 
+# Disable DPMS and prevent screen from blanking -> xset s off -dpms
+# Turn off screen immediately -> xset dpms force off 
+# Standby screen -> xset dpms force standby	
+# Suspend screen -> xset dpms force suspend	
+exec_always --no-startup-id xset s off -dpms
+
+bar {
+  output primary
+  i3bar_command i3bar -t
+  position top
+  tray_output none
+  workspace_buttons no
+  height 52
+
+  bindsym button1 nop
+  bindsym button2 nop
+  bindsym button3 nop
+  bindsym button4 nop
+  bindsym button5 nop
+
+  colors {
+    background #00000000
+  }
+
+ #  status_command i3blocks -c ~/.config/i3blocks.conf
+ #  separator_symbol " "
+ #  colors {
+ #    background $bar-bg-color
+ #    separator #757575
+	# 	#                  border             background         text
+	# 	focused_workspace  $bg-color          $bg-color          $text-color
+	# 	inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+	# 	urgent_workspace   $urgent-bg-color   $urgent-bg-color   $urgent-text-color
+	# }
+}
+

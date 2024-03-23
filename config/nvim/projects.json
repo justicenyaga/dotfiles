@@ -1,0 +1,7 @@
+{
+  "~/projects/golang/movies%-api": {
+    "name": "Golang Movies API",
+    "description": "A simple golang movies API",
+    "command": "go run ./cmd/api"
+  }
+}

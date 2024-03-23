@@ -1,0 +1,46 @@
+{
+  "Print Line": {
+    "prefix": "sout",
+    "body": ["System.out.println($0);"]
+  },
+  "Printf": {
+    "prefix": "souf",
+    "body": ["System.out.printf($0);"]
+  },
+  "Printc": {
+    "prefix": "soutc",
+    "body": ["System.out::println"]
+  },
+  "Private Static Final": {
+    "prefix": "prsf",
+    "body": ["private static final ${1:type} ${2:name} = ${3:value};"]
+  },
+  "Public Static Final": {
+    "prefix": "psf",
+    "body": ["public static final ${1:type} ${2:name} = ${3:value};"]
+  },
+  "Public Static Final Int": {
+    "prefix": "psfi",
+    "body": ["public static final int ${1:name} = ${2:value};"]
+  },
+  "Public Static Final String": {
+    "prefix": "psfs",
+    "body": ["public static final String ${1:name} = \"${2:value}\";"]
+  },
+  "If Condition": {
+    "prefix": "ifc",
+    "body": ["if (${1:condition}) {", "  ${0}", "}"]
+  },
+  "Else If": {
+    "prefix": "elif",
+    "body": ["else if (${1:condition}) {", "  ${0}", "}"]
+  },
+  "For Each": {
+    "prefix": "forI",
+    "body": ["for (${1:type} ${2:item} : ${3:items}) {", "  ${0}", "}"]
+  },
+  "Throw": {
+    "prefix": "thr",
+    "body": ["throw new "]
+  }
+}
