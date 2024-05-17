@@ -156,7 +156,7 @@ dependencies=(
   libfuse2 libjsoncpp-dev libmpdclient-dev libnl-genl-3-dev libpulse-dev libuv1-dev \
   libxcb1-dev libxcb-composite0-dev libxcb-cursor-dev libxcb-ewmh-dev libxcb-image0-dev \
   libxcb-icccm4-dev libxcb-randr0-dev libxcb-util0-dev libxcb-xkb-dev libxcb-xrm-dev \
-  light mate-power-manager mercurial net-tools network-manager pavucontrol picom playerctl \
+  light mate-power-manager mercurial mpv net-tools network-manager pavucontrol picom playerctl \
   pkg-config python3 python3-pip python3-sphinx python3-packaging python3-xcbgen python3-venv \
   rar ripgrep rofi ruby-full shotwell thunar tmux unrar unzip vlc wget x11-xserver-utils xautolock xclip xcb-proto xdotool yad zip zsh
 )
