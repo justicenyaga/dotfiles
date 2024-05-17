@@ -212,6 +212,9 @@ assign [class="MongoDB Compass"] $ws7
 # Open programs in floating mode
 for_window [class="Yad"] floating enable
 for_window [class="Blueman-manager"] floating enable
+for_window [class="Shotwell"] floating enable
+for_window [class="Eog"] floating enable
+for_window [class="Gnome-screenshot"] floating enable
 
 ####### CUSTOM KEYMAPS ####################
 # Screen brightness controls
