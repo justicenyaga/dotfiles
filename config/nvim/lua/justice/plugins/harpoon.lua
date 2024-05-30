@@ -47,5 +47,9 @@ return {
     keymap.set("n", "<leader>4", function()
       harpoon:list():select(4)
     end, { desc = "Open the fourth file in the harpoon list" })
+
+    keymap.set("n", "<leader>5", function()
+      harpoon:list():select(5)
+    end, { desc = "Open the fifth file in the harpoon list" })
   end,
 }

@@ -72,7 +72,8 @@ bindsym $mod+backslash split h
 bindsym $mod+minus split v
 
 # enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+bindsym $mod+f fullscreen enable; exec polybar-msg cmd quit
+bindsym $mod+shift+f fullscreen disable; exec ~/.config/polybar/launch.sh
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
@@ -173,7 +174,7 @@ client.urgent           $urgent-bg-color    $urgent-bg-color   $urgent-text-colo
 
 # Gaps
 gaps inner 12
-# gaps outer 3
+gaps outer 8
 
 # Monitors
 set $fm HDMI-1
@@ -193,14 +194,10 @@ workspace $ws10 output $sm
 
 # Assign programs to workspaces
 assign [class="kitty"] $ws1
-assign [class="Gnome-terminal"] $ws1
-assign [class="Xfce4-terminal"] $ws1
 assign [class="Code"] $ws1
 assign [class="Gedit"] $ws1
 assign [class="gnome-text-editor"] $ws1
-assign [class="Google-chrome"] $ws2
-# assign [class="firefox"] $ws2
-assign [class="org.gnome.Nautilus"] $ws3
+assign [class="Brave-browser"] $ws2
 assign [class="Thunar"] $ws3
 assign [class="File-roller"] $ws3
 assign [class="vlc"] $ws4
@@ -212,11 +209,13 @@ assign [class="MongoDB Compass"] $ws7
 # Open programs in floating mode
 for_window [class="Yad"] floating enable
 for_window [class="Blueman-manager"] floating enable
+for_window [class="Nm-connection-editor"] floating enable
 for_window [class="Shotwell"] floating enable
 for_window [class="Eog"] floating enable
 for_window [class="Gnome-screenshot"] floating enable
+for_window [class="gnome-calculator"] floating enable
 
-####### CUSTOM KEYMAPS ####################
+####### CUSTOM KEYMAPS #######
 # Screen brightness controls
 bindsym XF86MonBrightnessUp exec light -A 5 # increase screen brightness
 bindsym XF86MonBrightnessDown exec light -U 5 # decrease screen brightness
@@ -236,7 +235,7 @@ bindsym $mod+Shift+q exec ~/.config/polybar/scripts/powermenu.sh
 bindsym $mod+d exec rofi -no-config -no-lazy-grab -show drun -modi drun -theme ~/.config/rofi/config.rasi
 
 # Browser
-bindsym $mod+b exec google-chrome
+bindsym $mod+b exec brave-browser
 
 # Lock keymap
 bindsym $mod+Shift+x exec i3lock-fancy 
@@ -248,7 +247,7 @@ bindsym Shift+Print exec gnome-screenshot -i
 bindsym --release Print exec gnome-screenshot -a
 
 
-##### Startup programs ####################
+####### Startup programs #######
 # Autotiling
 exec_always --no-startup-id autotiling
 
@@ -263,7 +262,7 @@ exec_always --no-startup-id xset led 3
 exec --no-startup-id picom --config ~/.config/picom/picom.conf
 
 # Load wallpaper
-exec_always --no-startup-id feh --bg-fill ~/Pictures/background-4.jpg ~/Pictures/background-4.jpg
+exec_always --no-startup-id feh --bg-fill ~/Pictures/background-11.png ~/Pictures/background-11.png
 # exec_always --no-startup-id nitrogen --restore
 
 # Polybar
@@ -271,11 +270,11 @@ exec_always --no-startup-id ~/.config/polybar/launch.sh
 
 # Start common programs
 exec --no-startup-id kitty
-exec --no-startup-id google-chrome
+exec --no-startup-id brave-browser
 exec --no-startup-id thunar
 exec --no-startup-id vlc
 
-########### POWER MANAGEMENT ###############
+####### POWER MANAGEMENT #######
 # Screen lock
 # exec xautolock -time 30 -locker '&& i3lock-fancy -p' -notify 30 -notifier "notify-send -u critical -t 10000 -- 'LOCKING screen in 30 seconds'"
 
@@ -292,6 +291,7 @@ exec --no-startup-id vlc
 # Suspend screen -> xset dpms force suspend	
 exec_always --no-startup-id xset s off -dpms
 
+####### BAR #######
 bar {
   output primary
   i3bar_command i3bar -t
