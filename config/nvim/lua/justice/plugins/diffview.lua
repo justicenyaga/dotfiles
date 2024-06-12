@@ -126,6 +126,9 @@ return {
           flatten_dirs = true, -- Flatten dirs that only contain one single dir
           folder_statuses = "only_folded", -- One of 'never', 'only_folded' or 'always'.
         },
+        win_config = {
+          width = 25,
+        },
       },
       enhanced_diff_hl = true, -- See |diffview-config-enhanced_diff_hl|
       default_args = {
@@ -186,7 +189,8 @@ return {
           ["<cr>"] = cb("goto_file_tab"),
           ["i"] = cb("listing_style"), -- Toggle between 'list' and 'tree' views
           ["f"] = cb("toggle_flatten_dirs"), -- Flatten empty subdirectories in tree listing style.
-          ["<leader>e"] = cb("focus_files"),
+          -- ["<leader>e"] = cb("focus_files"),
+          ["<leader>e"] = cb("toggle_files"),
           ["<leader>cO"] = actions.conflict_choose_all("ours"), -- Choose the OURS version of a conflict for the whole file
           ["<leader>cT"] = actions.conflict_choose_all("theirs"), -- Choose the THEIRS version of a conflict for the whole file
           ["<leader>cB"] = actions.conflict_choose_all("base"), -- Choose BASE versions of a conflict for the whole file
